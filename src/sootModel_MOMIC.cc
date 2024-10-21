@@ -612,13 +612,20 @@ void sootModel_MOMIC::set_diffTable(const vector<double> &M) {
     //----------- set first column
 
     for (int k=0; k<Nmom; k++)
+    {
         diffTable[k][0] = log10(M[k]);
+        //cerr << "diffTable[" << k << "][0] = " << diffTable[k][0] << endl;
+    }
 
     //----------- set other columns (differences) using previous column
 
     for (int j=1; j<Nmom; j++)           // each column
-        for (int i=0; i<Nmom-j; i++)     // elements in column (row values)
+        for (int i=0; i<Nmom-j; i++)
+        {
             diffTable[i][j] = diffTable[i+1][j-1] - diffTable[i][j-1];
+            //cerr << "diffTable[" << i << "][" << j << "] = " <<  diffTable[i][j] << endl;
+        }     // elements in column (row values)
+            //diffTable[i][j] = diffTable[i+1][j-1] - diffTable[i][j-1];
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -644,24 +651,32 @@ void sootModel_MOMIC::set_diffTable(const vector<double> &M) {
 double sootModel_MOMIC::Mr(const double r) {
 
     double l10Mr = diffTable[0][0];
+    //cerr << "l10Mr intial = " << diffTable[0][0] << endl;
     double coef = r;
+    //cerr << "r = " << r << endl;
     int kend = (r >= 0) ? Nmom : 3;
+    //cerr << "kend = " << kend << endl;
     for(int k=1; k<kend; k++) {
         l10Mr += coef*diffTable[0][k];
+        //cerr << "l10Mr[" << k << "] = " << coef*diffTable[0][k]<<endl;
         coef *= (r-k)/double(k+1);
+        //cerr << "coef["<< k << "] ="  << coef << endl;
     }
-    /*double maxLogValue = std::log10(std::numeric_limits<double>::max());
-    cerr << "max = " << maxLogValue << endl;
+    double maxLogValue = std::log10(std::numeric_limits<double>::max());
+    //cerr << "max = " << maxLogValue << endl;
     double minLogValue = std::log10(std::numeric_limits<double>::min());
-    cerr << "min = " << minLogValue << endl;
-    if (l10Mr > maxLogValue) {
-        return std::numeric_limits<double>::max(); // 返回最大值
-    } else if (l10Mr < minLogValue) {
-        return std::numeric_limits<double>::min(); // 返回最小值
-    }*/
-
-    double value = pow(10., l10Mr);
-    return isfinite(value) ? value : 0.0;
+    //cerr << "min = " << minLogValue << endl;
+    double value;
+    if (l10Mr > maxLogValue || l10Mr < minLogValue) {
+        value = 0;
+    } else
+    {
+        value = pow(10., l10Mr);
+    }
+    //cerr << "l10Mr = " << l10Mr << endl;
+    //double value = pow(10., l10Mr);
+    return value;
+    //return isfinite(value)? value : 0.0;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -685,11 +700,16 @@ void sootModel_MOMIC::set_fractional_moments_Mp6_Mq6() {
 
     double p = -4;
     for(size_t i=0; i<np[Nmom]; i++, p+=2)
+    {
         Mp6[i] = Mr(p/6.0);
-
+        //cerr <<"Mp6[ " << i << "] = " << Mp6[i] << endl;
+    }
     double q = -3;
     for(size_t i=0; i<nq[Nmom]; i++, q+=2)
+    {
         Mq6[i] = Mr(q/6.0);
+        //cerr <<"Mq6[ " << i << "] = " << Mq6[i] << endl;
+    }
 
 }
 
