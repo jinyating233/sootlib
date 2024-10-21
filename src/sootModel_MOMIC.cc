@@ -142,7 +142,7 @@ void sootModel_MOMIC::setSourceTerms(state &state) {
 
     if (nucl->mechType == nucleationMech::PAH) {
 
-        //set_mDimerPowers();      // not needed here (called in pahSootCollisionRatePerDimer in nucl PAH)
+        set_mDimerPowers();      // not needed here (called in pahSootCollisionRatePerDimer in nucl PAH)
 
         vector<double> Mcnd_C(Nmom, 0);
         vector<double> Mcnd_FM(Nmom, 0);
@@ -650,6 +650,15 @@ double sootModel_MOMIC::Mr(const double r) {
         l10Mr += coef*diffTable[0][k];
         coef *= (r-k)/double(k+1);
     }
+    /*double maxLogValue = std::log10(std::numeric_limits<double>::max());
+    cerr << "max = " << maxLogValue << endl;
+    double minLogValue = std::log10(std::numeric_limits<double>::min());
+    cerr << "min = " << minLogValue << endl;
+    if (l10Mr > maxLogValue) {
+        return std::numeric_limits<double>::max(); // 返回最大值
+    } else if (l10Mr < minLogValue) {
+        return std::numeric_limits<double>::min(); // 返回最小值
+    }*/
 
     double value = pow(10., l10Mr);
     return isfinite(value) ? value : 0.0;
@@ -674,12 +683,12 @@ double sootModel_MOMIC::Mr(const double r) {
 
 void sootModel_MOMIC::set_fractional_moments_Mp6_Mq6() {
 
-    double p;
-    for(size_t i=0, p=-4; i<np[Nmom]; i++, p+=2)
+    double p = -4;
+    for(size_t i=0; i<np[Nmom]; i++, p+=2)
         Mp6[i] = Mr(p/6.0);
 
-    double q;
-    for(size_t i=0, q=-3; i<nq[Nmom]; i++, q+=2)
+    double q = -3;
+    for(size_t i=0; i<nq[Nmom]; i++, q+=2)
         Mq6[i] = Mr(q/6.0);
 
 }

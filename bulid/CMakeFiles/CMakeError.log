@@ -1,0 +1,108 @@
+Determining if the function sgemm_ exists failed with the following output:
+Change Dir: /home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-GITSdd
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_471e1/fast && /usr/bin/make  -f CMakeFiles/cmTC_471e1.dir/build.make CMakeFiles/cmTC_471e1.dir/build
+make[1]: Entering directory '/home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-GITSdd'
+Building CXX object CMakeFiles/cmTC_471e1.dir/CheckFunctionExists.cxx.o
+/usr/bin/c++   -DCHECK_FUNCTION_EXISTS=sgemm_ -std=c++1z -o CMakeFiles/cmTC_471e1.dir/CheckFunctionExists.cxx.o -c /home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-GITSdd/CheckFunctionExists.cxx
+Linking CXX executable cmTC_471e1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_471e1.dir/link.txt --verbose=1
+/usr/bin/c++  -DCHECK_FUNCTION_EXISTS=sgemm_ CMakeFiles/cmTC_471e1.dir/CheckFunctionExists.cxx.o -o cmTC_471e1 
+CMakeFiles/cmTC_471e1.dir/CheckFunctionExists.cxx.o: In function `main':
+CheckFunctionExists.cxx:(.text+0x10): undefined reference to `sgemm_'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_471e1.dir/build.make:98: recipe for target 'cmTC_471e1' failed
+make[1]: *** [cmTC_471e1] Error 1
+make[1]: Leaving directory '/home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-GITSdd'
+Makefile:127: recipe for target 'cmTC_471e1/fast' failed
+make: *** [cmTC_471e1/fast] Error 2
+
+
+
+Performing C++ SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-fAXxny
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_f8ee1/fast && /usr/bin/make  -f CMakeFiles/cmTC_f8ee1.dir/build.make CMakeFiles/cmTC_f8ee1.dir/build
+make[1]: Entering directory '/home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-fAXxny'
+Building CXX object CMakeFiles/cmTC_f8ee1.dir/src.cxx.o
+/usr/bin/c++ -DCMAKE_HAVE_LIBC_PTHREAD  -std=c++1z -o CMakeFiles/cmTC_f8ee1.dir/src.cxx.o -c /home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-fAXxny/src.cxx
+Linking CXX executable cmTC_f8ee1
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f8ee1.dir/link.txt --verbose=1
+/usr/bin/c++ CMakeFiles/cmTC_f8ee1.dir/src.cxx.o -o cmTC_f8ee1 
+CMakeFiles/cmTC_f8ee1.dir/src.cxx.o: In function `main':
+src.cxx:(.text+0x3e): undefined reference to `pthread_create'
+src.cxx:(.text+0x4a): undefined reference to `pthread_detach'
+src.cxx:(.text+0x56): undefined reference to `pthread_cancel'
+src.cxx:(.text+0x67): undefined reference to `pthread_join'
+src.cxx:(.text+0x7b): undefined reference to `pthread_atfork'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_f8ee1.dir/build.make:98: recipe for target 'cmTC_f8ee1' failed
+make[1]: *** [cmTC_f8ee1] Error 1
+make[1]: Leaving directory '/home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-fAXxny'
+Makefile:127: recipe for target 'cmTC_f8ee1/fast' failed
+make: *** [cmTC_f8ee1/fast] Error 2
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-qP8dFT
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_5598d/fast && /usr/bin/make  -f CMakeFiles/cmTC_5598d.dir/build.make CMakeFiles/cmTC_5598d.dir/build
+make[1]: Entering directory '/home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-qP8dFT'
+Building CXX object CMakeFiles/cmTC_5598d.dir/CheckFunctionExists.cxx.o
+/usr/bin/c++   -DCHECK_FUNCTION_EXISTS=pthread_create -std=c++1z -o CMakeFiles/cmTC_5598d.dir/CheckFunctionExists.cxx.o -c /home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-qP8dFT/CheckFunctionExists.cxx
+Linking CXX executable cmTC_5598d
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_5598d.dir/link.txt --verbose=1
+/usr/bin/c++  -DCHECK_FUNCTION_EXISTS=pthread_create CMakeFiles/cmTC_5598d.dir/CheckFunctionExists.cxx.o -o cmTC_5598d  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_5598d.dir/build.make:98: recipe for target 'cmTC_5598d' failed
+make[1]: *** [cmTC_5598d] Error 1
+make[1]: Leaving directory '/home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-qP8dFT'
+Makefile:127: recipe for target 'cmTC_5598d/fast' failed
+make: *** [cmTC_5598d/fast] Error 2
+
+
+
+Determining if the function cheev_ exists failed with the following output:
+Change Dir: /home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-PNGWeW
+
+Run Build Command(s):/usr/bin/make -f Makefile cmTC_15771/fast && /usr/bin/make  -f CMakeFiles/cmTC_15771.dir/build.make CMakeFiles/cmTC_15771.dir/build
+make[1]: Entering directory '/home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-PNGWeW'
+Building CXX object CMakeFiles/cmTC_15771.dir/CheckFunctionExists.cxx.o
+/usr/bin/c++   -DCHECK_FUNCTION_EXISTS=cheev_ -std=c++1z -o CMakeFiles/cmTC_15771.dir/CheckFunctionExists.cxx.o -c /home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-PNGWeW/CheckFunctionExists.cxx
+Linking CXX executable cmTC_15771
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_15771.dir/link.txt --verbose=1
+/usr/bin/c++  -DCHECK_FUNCTION_EXISTS=cheev_ CMakeFiles/cmTC_15771.dir/CheckFunctionExists.cxx.o -o cmTC_15771  /usr/lib/x86_64-linux-gnu/libblas.so -lpthread -lm -ldl 
+CMakeFiles/cmTC_15771.dir/CheckFunctionExists.cxx.o: In function `main':
+CheckFunctionExists.cxx:(.text+0x10): undefined reference to `cheev_'
+collect2: error: ld returned 1 exit status
+CMakeFiles/cmTC_15771.dir/build.make:99: recipe for target 'cmTC_15771' failed
+make[1]: *** [cmTC_15771] Error 1
+make[1]: Leaving directory '/home/jinyating/work/sootlib/bulid/CMakeFiles/CMakeScratch/TryCompile-PNGWeW'
+Makefile:127: recipe for target 'cmTC_15771/fast' failed
+make: *** [cmTC_15771/fast] Error 2
+
+
+

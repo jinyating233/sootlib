@@ -23,7 +23,7 @@ const double bCoag   = 0.8536;      ///< coagulation constant, bounded 1/sqrt(2)
 
 const double onethird = 1.0/3.0;
 const double twothird = 2.0/3.0;
-const double root2    = sqrt(2.0);
+const double root2    = std::sqrt(2.0);
 const double mmin     = 2E-26;      ///< mass of a carbon atom (kg)
 
 //////////////////// mechanism types
@@ -88,41 +88,46 @@ const std::vector<double> gasSpMW{      ///< (kg/kmol); make sure the order corr
 // See Blanquart & Pitsch (2009) "A joint volume-surface-hydrogen
 // multi-variate model for soot formation"
 
-enum class pahSp{ C10H8, C12H8, C12H10, C14H10, C16H10, C18H10, size };
+enum class pahSp{ C10H8, //C12H8, 
+C12H10, 
+C14H10, 
+C16H10, 
+//C18H10, 
+size };
 
 const std::vector<double> pahSpMW = {     ///< (kg/kmol)
     128.174,   // C10H8
-    152.196,   // C12H8
+    //152.196,   // C12H8
     154.212,   // C12H10
     178.234,   // C14H10
     202.256,   // C16H10
-    226.278    // C18H10
+    //226.278    // C18H10
 };
 
 const std::vector<int> pahSpNC = {        ///< # carbon atoms per PAH species
     10,        // C10H8
-    12,        // C12H8
+    //12,        // C12H8
     12,        // C12H10
     14,        // C14H10
     16,        // C16H10
-    18         // C18H10
+    //18         // C18H10
 };
 const std::vector<int> pahSpNH = {        ///< # hydrogen atoms per PAH species
     8,         // C10H8
-    8,         // C12H8
+    //8,         // C12H8
     10,        // C12H10
     10,        // C14H10
     10,        // C16H10
-    10         // C18H10
+    //10         // C18H10
 };
 
 const std::vector<double> pahSpGamma = {   ///< unitless sticking coefficient
     0.00133,   // C10H8,                   ///< gamma_i = CN*mi^4; CN = 1.5E-11 (fit); gamma_C10H8 = 0.004/3
-    0.00267,   // C12H8,                   ///< gamma_C12H8 = 0.008/3 (See Blanquart and Pitsch in Bockhorn 2009
+    //0.00267,   // C12H8,                   ///< gamma_C12H8 = 0.008/3 (See Blanquart and Pitsch in Bockhorn 2009
     0.0085,    // C12H10,
     0.0150,    // C14H10,
     0.0250,    // C16H10,
-    0.0390     // C18H10,
+    //0.0390     // C18H10,
 };
 
 //////////////////// custom structures

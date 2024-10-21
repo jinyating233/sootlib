@@ -49,7 +49,7 @@ class state {
         double getGasSpP(gasSp sp)  const { return yGas[(int)sp] * MWGas / gasSpMW[(int)sp] * P; }
 
         /** gas mean free path */
-        double getGasMeanFreePath() const { return muGas/rhoGas*sqrt(M_PI*MWGas/(2.0*Rg*T)); }
+        double getGasMeanFreePath() const { return muGas/rhoGas*std::sqrt(M_PI*MWGas/(2.0*Rg*T)); }
 
         /** PAH species concentration (kmol/m3) */
         double get_pahSpC(pahSp sp) const { return rhoGas * yPah[(int)sp] / pahSpMW[(int)sp]; }

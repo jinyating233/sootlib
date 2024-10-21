@@ -32,7 +32,7 @@ public:
     virtual double getCoagulationSootRate(const state& state, double m1, double m2) const = 0;
 
     double getKfm(const state& state) const {
-        return FM_multiplier * eps_c * sqrt(0.5*M_PI*kb*state.T)*pow(6./(M_PI*rhoSoot), twothird);
+        return FM_multiplier * eps_c * std::sqrt(0.5*M_PI*kb*state.T)*std::pow(6./(M_PI*rhoSoot), twothird);
     }
 
     double getKc(const state& state) const {
@@ -40,7 +40,7 @@ public:
     }
 
     double getKcp(const state& state) const {
-        return 2.*1.657*state.getGasMeanFreePath()*pow(M_PI*rhoSoot/6., onethird);
+        return 2.*1.657*state.getGasMeanFreePath()*std::pow(M_PI*rhoSoot/6., onethird);
     }
 
     void set_FM_multiplier(double FM_multiplier_) {
